@@ -1,5 +1,6 @@
 package ie.hjkl.companieshouse.data.directory;
 
+import ie.hjkl.companieshouse.data.utils.DateUtils;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -18,15 +19,15 @@ public class SnapshotCompany {
     }
 
     public LocalDate getIncorporatedOn() {
-        return parseDate(record.substring(12, 20));
+        return DateUtils.parse(record.substring(12, 20));
     }
 
     public LocalDate getAccountsMadeUpTo() {
-        return parseDate(record.substring(20, 28));
+        return DateUtils.parse(record.substring(20, 28));
     }
 
     public LocalDate getAnnualReturnMadeUpTo() {
-        return parseDate(record.substring(28, 36));
+        return DateUtils.parse(record.substring(28, 36));
     }
 
     public String getStatus() {
@@ -80,20 +81,6 @@ public class SnapshotCompany {
                 address.add(part);
 
         return address.toArray(new String[address.size()]);
-    }
-
-    private LocalDate parseDate(String rfcFormat) {
-        if (rfcFormat.isEmpty())
-            return null;
-
-        int year = Integer.parseInt(rfcFormat.substring(0, 4));
-        int month = Integer.parseInt(rfcFormat.substring(4, 6));
-        int day = Integer.parseInt(rfcFormat.substring(6, 8));
-
-        if (year == 0)
-            return null;
-
-        return new LocalDate(year, month, day);
     }
 
     private String[] getVariableData() {
