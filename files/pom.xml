@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ie.hjkl.companieshouse</groupId>
-    <artifactId>files</artifactId>
+    <artifactId>companieshouse-files</artifactId>
     <version>1.0</version>
 
     <dependencies>
         <dependency>
             <groupId>ie.hjkl.companieshouse</groupId>
-            <artifactId>data</artifactId>
+            <artifactId>companieshouse-data</artifactId>
             <version>1.0</version>
         </dependency>
 
