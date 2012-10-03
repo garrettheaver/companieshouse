@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class AppointmentSnapshot extends Snapshot implements Iterable<SnapshotCompany> {
+public class AppointmentSnapshot extends Snapshot<SnapshotCompany> {
 
     public AppointmentSnapshot(String path) throws IOException {
         super(path);
@@ -56,5 +56,4 @@ class AppointmentSnapshotIterator extends SnapshotIterator<SnapshotCompany> {
         SnapshotAppointee[] array = list.toArray(new SnapshotAppointee[list.size()]);
         return new SnapshotCompany(currentCompany, array);
     }
-
 }

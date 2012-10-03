@@ -3,13 +3,10 @@ package ie.hjkl.companieshouse.files;
 import ie.hjkl.companieshouse.data.utils.DateUtils;
 import org.joda.time.LocalDate;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.Iterator;
 
-public abstract class Snapshot {
+public abstract class Snapshot<T> implements Iterable<T> {
 
     protected String path, firstLine, finalLine;
 
@@ -47,7 +44,6 @@ public abstract class Snapshot {
             finalLine = file.readLine();
         } while (finalLine == null || false == finalLine.startsWith("99999999"));
     }
-
 }
 
 abstract class SnapshotIterator<T> implements Iterator<T> {
@@ -69,5 +65,4 @@ abstract class SnapshotIterator<T> implements Iterator<T> {
     public void remove() {
         throw new UnsupportedOperationException();
     }
-
 }

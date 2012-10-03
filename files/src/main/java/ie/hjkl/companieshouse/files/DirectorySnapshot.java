@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class DirectorySnapshot extends Snapshot implements Iterable<SnapshotCompany> {
+public class DirectorySnapshot extends Snapshot<SnapshotCompany> {
 
     public DirectorySnapshot(String path) throws IOException {
         super(path);
@@ -45,5 +45,4 @@ class DirectorySnapshotIterator extends SnapshotIterator<SnapshotCompany> {
 
         return new SnapshotCompany(currentLine);
     }
-
 }
