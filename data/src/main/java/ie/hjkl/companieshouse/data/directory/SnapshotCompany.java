@@ -9,6 +9,7 @@ import java.util.List;
 public class SnapshotCompany {
 
     private String record;
+    private String[] variableData;
 
     public SnapshotCompany(String record) {
         this.record = record;
@@ -84,7 +85,10 @@ public class SnapshotCompany {
     }
 
     private String[] getVariableData() {
-        return record.substring(311).split("<");
+        if (variableData == null)
+            variableData = record.substring(311).split("<");
+
+        return variableData;
     }
 
 }

@@ -9,6 +9,7 @@ import java.util.List;
 public abstract class SnapshotAppointee {
 
     protected String record;
+    private String[] variableData;
 
     public SnapshotAppointee(String record) {
         this.record = record;
@@ -54,7 +55,10 @@ public abstract class SnapshotAppointee {
     }
 
     protected String[] getVariableData() {
-        return record.substring(68).split("<");
+        if (variableData == null)
+            variableData = record.substring(68).split("<");
+
+        return variableData;
     }
 
 }
