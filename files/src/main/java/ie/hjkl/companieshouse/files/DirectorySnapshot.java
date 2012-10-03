@@ -1,28 +1,17 @@
 package ie.hjkl.companieshouse.files;
 
 import ie.hjkl.companieshouse.data.directory.SnapshotCompany;
-import ie.hjkl.companieshouse.data.utils.DateUtils;
-import org.joda.time.LocalDate;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
 
-public class DirectorySnapshot implements Iterable<SnapshotCompany> {
-
-    private String path, firstLine, finalLine;
-    public static final int FINAL_LINE_LENGTH = 14 + 1;
+public class DirectorySnapshot extends Snapshot implements Iterable<SnapshotCompany> {
 
     public DirectorySnapshot(String path) throws IOException {
-        this.path = path;
-        RandomAccessFile file = new RandomAccessFile(new File(path), "r");
-
-        try {
-            firstLine = file.readLine();
-            file.seek(file.length() - FINAL_LINE_LENGTH);
-            finalLine = file.readLine();
-        } finally {
-            file.close();
-        }
+        super(path);
     }
 
     @Override
@@ -36,16 +25,9 @@ public class DirectorySnapshot implements Iterable<SnapshotCompany> {
         }
     }
 
-    public int getRunNumber() {
-        return Integer.parseInt(firstLine.substring(8, 12));
-    }
-
-    public LocalDate getProducedOn() {
-        return DateUtils.parse(firstLine.substring(12, 20));
-    }
-
+    @Override
     public int getNumberOfRecords() {
-        return Integer.parseInt(finalLine.substring(8, 14));
+        return Integer.parseInt(finalLine.substring(8, 16));
     }
 }
 
