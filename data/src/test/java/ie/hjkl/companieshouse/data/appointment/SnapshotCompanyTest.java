@@ -25,9 +25,13 @@ public class SnapshotCompanyTest {
     }
 
     @Test
-    public void getStatus() {
-        assertNull(record0.getStatus());
+    public void getStatusWhenPresent() {
         assertEquals("D", record1.getStatus());
+    }
+
+    @Test
+    public void getStatusWhenBlank() {
+        assertNull(record0.getStatus());
     }
 
     @Test

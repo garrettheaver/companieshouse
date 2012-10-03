@@ -60,9 +60,13 @@ public class SnapshotAppointeeFactoryTest {
     }
 
     @Test
-    public void getResignedOn() {
-        assertNull(record0.getResignedOn());
+    public void getResignedOnWhenPresent() {
         assertEquals(new LocalDate(2007, 6, 4), record1.getResignedOn());
+    }
+
+    @Test
+    public void getResignedOnWhenBlank() {
+        assertNull(record0.getResignedOn());
     }
 
     @Test
