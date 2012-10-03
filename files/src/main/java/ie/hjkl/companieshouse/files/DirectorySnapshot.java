@@ -24,28 +24,13 @@ public class DirectorySnapshot extends Snapshot implements Iterable<SnapshotComp
             throw new RuntimeException(ex);
         }
     }
-
-    @Override
-    public int getNumberOfRecords() {
-        return Integer.parseInt(finalLine.substring(8, 16));
-    }
 }
 
-class DirectorySnapshotIterator implements Iterator<SnapshotCompany> {
-
-    private BufferedReader reader;
-    private String nextLine;
+class DirectorySnapshotIterator extends SnapshotIterator<SnapshotCompany> {
 
     public DirectorySnapshotIterator(BufferedReader reader) throws IOException {
-        this.reader = reader;
-
-        reader.readLine();
+        super(reader);
         this.nextLine = reader.readLine();
-    }
-
-    @Override
-    public boolean hasNext() {
-        return nextLine != null && false == nextLine.startsWith("99999999");
     }
 
     @Override
@@ -61,8 +46,4 @@ class DirectorySnapshotIterator implements Iterator<SnapshotCompany> {
         return new SnapshotCompany(currentLine);
     }
 
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
 }
