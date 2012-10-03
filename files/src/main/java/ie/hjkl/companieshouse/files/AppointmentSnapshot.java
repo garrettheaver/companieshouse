@@ -32,20 +32,22 @@ public class AppointmentSnapshot extends Snapshot<SnapshotCompany> {
 
 class AppointmentSnapshotIterator extends SnapshotIterator<SnapshotCompany> {
 
+    private static final String APPOINTEE_RECORD_MARKER = "2";
+
     public AppointmentSnapshotIterator(BufferedReader reader) throws IOException {
         super(reader);
-        this.nextLine = reader.readLine();
+        this.nextRecord = reader.readLine();
     }
 
     @Override
     public SnapshotCompany next() {
-        String currentCompany = nextLine;
+        String currentCompany = nextRecord;
         List<SnapshotAppointee> list = new ArrayList<SnapshotAppointee>();
 
         try {
-            while ((nextLine = reader.readLine()) != null) {
-                if (nextLine.substring(8, 9).equals("2"))
-                    list.add(SnapshotAppointeeFactory.getAppointee(nextLine));
+            while ((nextRecord = reader.readLine()) != null) {
+                if (nextRecord.substring(8, 9).equals(APPOINTEE_RECORD_MARKER))
+                    list.add(SnapshotAppointeeFactory.getAppointee(nextRecord));
                 else
                     break;
             }

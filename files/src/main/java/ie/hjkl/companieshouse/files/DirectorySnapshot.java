@@ -30,15 +30,15 @@ class DirectorySnapshotIterator extends SnapshotIterator<SnapshotCompany> {
 
     public DirectorySnapshotIterator(BufferedReader reader) throws IOException {
         super(reader);
-        this.nextLine = reader.readLine();
+        this.nextRecord = reader.readLine();
     }
 
     @Override
     public SnapshotCompany next() {
-        String currentLine = nextLine;
+        String currentLine = nextRecord;
 
         try {
-            nextLine = reader.readLine();
+            nextRecord = reader.readLine();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

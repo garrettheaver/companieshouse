@@ -8,7 +8,8 @@ import java.util.Iterator;
 
 public abstract class Snapshot<T> implements Iterable<T> {
 
-    protected String path, firstLine, finalLine;
+    protected String path, firstRecord, finalRecord;
+    public static final String FINAL_RECORD_MARKER = "99999999";
 
     public Snapshot(String path) throws IOException {
         this.path = path;
@@ -22,43 +23,43 @@ public abstract class Snapshot<T> implements Iterable<T> {
     }
 
     public int getRunNumber() {
-        return Integer.parseInt(firstLine.substring(8, 12));
+        return Integer.parseInt(firstRecord.substring(8, 12));
     }
 
     public LocalDate getProducedOn() {
-        return DateUtils.parse(firstLine.substring(12, 20));
+        return DateUtils.parse(firstRecord.substring(12, 20));
     }
 
     public int getNumberOfRecords() {
-        return Integer.parseInt(finalLine.substring(8, 16));
+        return Integer.parseInt(finalRecord.substring(8, 16));
     }
 
     private void readMetaDataLines(RandomAccessFile file) throws IOException {
         int seekOffset = 0;
 
         file.seek(seekOffset);
-        firstLine = file.readLine();
+        firstRecord = file.readLine();
 
         do {
             file.seek(file.length() - seekOffset++);
-            finalLine = file.readLine();
-        } while (finalLine == null || false == finalLine.startsWith("99999999"));
+            finalRecord = file.readLine();
+        } while (finalRecord == null || false == finalRecord.startsWith(FINAL_RECORD_MARKER));
     }
 }
 
 abstract class SnapshotIterator<T> implements Iterator<T> {
 
     protected BufferedReader reader;
-    protected String nextLine;
+    protected String nextRecord;
 
     public SnapshotIterator(BufferedReader reader) throws IOException {
         this.reader = reader;
-        this.nextLine = reader.readLine();
+        this.nextRecord = reader.readLine();
     }
 
     @Override
     public boolean hasNext() {
-        return nextLine != null && false == nextLine.startsWith("99999999");
+        return nextRecord != null && false == nextRecord.startsWith(Snapshot.FINAL_RECORD_MARKER);
     }
 
     @Override
