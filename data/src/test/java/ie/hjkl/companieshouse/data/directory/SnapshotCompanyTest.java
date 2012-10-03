@@ -27,20 +27,32 @@ public class SnapshotCompanyTest {
     }
 
     @Test
-    public void getIncorporatedOn() {
+    public void getIncorporatedOnWhenPresent() {
         assertEquals(new LocalDate(1863, 1, 15), record0.getIncorporatedOn());
+    }
+
+    @Test
+    public void getIncorporatedOnWhenBlank() {
         assertNull(record1.getIncorporatedOn());
     }
 
     @Test
-    public void getAccountsMadeUpTo() {
+    public void getAccountsMadeUpToWhenPresent() {
         assertEquals(new LocalDate(2010, 12, 31), record0.getAccountsMadeUpTo());
+    }
+
+    @Test
+    public void getAccountsMadeUpToWhenBlank() {
         assertNull(record1.getAccountsMadeUpTo());
     }
 
     @Test
-    public void getAnnualReturnMadeUpTo() {
+    public void getAnnualReturnMadeUpToWhenPresent() {
         assertEquals(new LocalDate(2011, 9, 25), record0.getAnnualReturnMadeUpTo());
+    }
+
+    @Test
+    public void getAnnualReturnMadeUpToWhenBlank() {
         assertNull(record1.getAnnualReturnMadeUpTo());
     }
 
@@ -65,20 +77,32 @@ public class SnapshotCompanyTest {
     }
 
     @Test
-    public void getInspectionMarker() {
-        assertNull(record0.getInspectionMarker());
+    public void getInspectionMarkerWhenPresent() {
         assertEquals("L", record1.getInspectionMarker());
     }
 
     @Test
-    public void getPostcode() {
+    public void getInspectionMarkerWhenBlank() {
+        assertNull(record0.getInspectionMarker());
+    }
+
+    @Test
+    public void getPostcodeWhenPresent() {
         assertEquals("RH12 1XL", record0.getPostcode());
+    }
+
+    @Test
+    public void getPostcodeWhenBlank() {
         assertNull(record1.getPostcode());
     }
 
     @Test
-    public void getPostcodeStatus() {
+    public void getPostcodeStatusWhenPresent() {
         assertEquals("O", record0.getPostcodeStatus());
+    }
+
+    @Test
+    public void getPostcodeStatusWhenBlank() {
         assertNull(record1.getPostcodeStatus());
     }
 
