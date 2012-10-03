@@ -1,11 +1,19 @@
 package ie.hjkl.companieshouse.data.appointment;
 
+import ie.hjkl.companieshouse.data.appointment.appointees.SnapshotAppointee;
+
 public class SnapshotCompany {
 
     private String record;
+    private SnapshotAppointee[] appointees;
 
     public SnapshotCompany(String record) {
+        this(record, null);
+    }
+
+    public SnapshotCompany(String record, SnapshotAppointee[] appointees) {
         this.record = record;
+        this.appointees = appointees;
     }
 
     public String getNumber() {
@@ -17,13 +25,13 @@ public class SnapshotCompany {
         return status.isEmpty() ? null : status;
     }
 
-    public int getNumberOfOfficers() {
-        return Integer.parseInt(record.substring(32, 36));
-    }
-
     public String getName() {
         String name = record.substring(40, record.length()).trim();
         return name.substring(0, name.length() - 1);
+    }
+
+    public SnapshotAppointee[] getAppointees() {
+        return appointees;
     }
 
 }

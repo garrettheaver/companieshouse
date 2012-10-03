@@ -35,11 +35,6 @@ public class SnapshotCompanyTest {
     }
 
     @Test
-    public void getNumberOfOfficers() {
-        assertEquals(3, record0.getNumberOfOfficers());
-    }
-
-    @Test
     public void getName() {
         assertEquals("FLOW SYSTEMS DESIGN LIMITED", record0.getName());
     }
