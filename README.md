@@ -7,7 +7,7 @@ A small set of classes for parsing companieshouse.gov.uk data files
 The project is structured into two modules
 
 1. Data - Parses raw strings which are in Companies House format
-2. Files - For reading Companies House files streams
+2. Files - For reading Companies House file streams
 
 ## File Types
 At present the project supports two types of Companies House file
